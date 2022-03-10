@@ -29,16 +29,15 @@ from array.size down to 1:
   get the hash corresponding to that place
   get the numeral from the hash for that digit and add to result string
 return the result string
-
 =end
 
 class RomanNumeral
-  NUMERALS = { 
+  NUMERALS = {
     1 => ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'],
     2 => ['', 'X', 'XX', 'XXX', 'XL', 'L', 'LX', 'LXX', 'LXXX', 'XC'],
     3 => ['', 'C', 'CC', 'CCC', 'CD', 'D', 'DC', 'DCC', 'DCCC', 'CM'],
     4 => ['', 'M', 'MM', 'MMM']
-   }
+  }.freeze
 
   attr_reader :integer
 
@@ -48,7 +47,7 @@ class RomanNumeral
 
   def to_roman
     roman_str = ''
-    arr = integer.dup.to_s.chars.map(&:to_i)
+    arr = integer.dup.digits.reverse
     arr.size.downto(1) do |place|
       roman_str << NUMERALS[place][arr[-place]]
     end
